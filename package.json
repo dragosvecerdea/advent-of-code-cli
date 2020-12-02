@@ -4,7 +4,6 @@
   "description": "A simple and intuitive client to be used for solving and submitting solutions to AdventOfCode",
   "main": "index.js",
   "scripts": {
-    "postinstall": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,9 +15,5 @@
   "bugs": {
     "url": "https://github.com/dragosv99/aoc-cli/issues"
   },
-  "homepage": "https://github.com/dragosv99/aoc-cli#readme",
-  "devDependencies": {
-    "husky": "^5.0.4",
-    "pinst": "^2.1.1"
-  }
+  "homepage": "https://github.com/dragosv99/aoc-cli#readme"
 }
