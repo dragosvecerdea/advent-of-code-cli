@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "husky install",
+    "commit": "commit",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
