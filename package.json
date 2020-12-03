@@ -2,31 +2,45 @@
   "name": "aoc-cli",
   "version": "1.0.0",
   "description": "A simple and intuitive client to be used for solving and submitting solutions to AdventOfCode",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "postinstall": "husky install",
-    "commit": "commit",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dragosv99/aoc-cli.git"
+    "test": "echo \"Not tests yet\""
   },
   "husky": {
     "hooks": {
-      "commit-msg": "echo 'Hello'"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS --verbose"
     }
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dragosv99/aoc-cli/issues"
+  "bin": {
+    "aoc": "src/index.js"
   },
-  "homepage": "https://github.com/dragosv99/aoc-cli#readme",
+  "dependencies": {
+    "commander": "^6.2.0",
+    "husky": "^4.3.0"
+  },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "husky": "^5.0.4",
-    "pinst": "^2.1.1"
+    "eslint": "^7.14.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.2.0",
+    "lint-staged": "^10.5.2",
+    "prettier": "^2.2.1"
   }
 }
