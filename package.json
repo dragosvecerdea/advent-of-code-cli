@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "A simple and intuitive client to be used for solving and submitting solutions to AdventOfCode",
   "private": true,
+  "type": "module",
   "scripts": {
+    "launch:dev": "node -r esm src/index.js",
     "test": "echo \"Not tests yet\""
   },
   "husky": {
@@ -26,20 +28,27 @@
   "author": "",
   "license": "ISC",
   "bin": {
-    "aoc": "src/index.js"
+    "aoc": "./src/index.js"
   },
   "dependencies": {
+    "chalk": "^4.1.0",
     "commander": "^6.2.0",
-    "husky": "^4.3.0"
+    "esm": "^3.2.25",
+    "figlet": "^1.5.0",
+    "husky": "^4.3.0",
+    "lodash": "^4.17.20"
   },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
-    "eslint": "^7.14.0",
+    "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.2.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^3.0.0",
     "lint-staged": "^10.5.2",
     "prettier": "^2.2.1"
   }
