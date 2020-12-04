@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 import figlet from 'figlet';
 import { program } from 'commander';
+import dotenv from 'dotenv';
 // eslint-disable-next-line import/extensions
 import chalkify from './utils/chalkify.js';
 // eslint-disable-next-line import/extensions
-import create from './actions/createTemplate.js';
+import create from './actions/create.js';
+
+dotenv.config();
 
 program
   .version('1.0.0')
@@ -19,32 +22,29 @@ program
     )
   );
 
-
 const template = [
-    { name: 'task1', extension: 'py', isTask: true },
-    { name: 'task2', extension: 'py', isTask: true },
-    { name: 'input', extension: 'txt', isTask: false },
-    { name: 'output', extension: 'txt', isTask: false },
+  { name: 'task1', extension: 'py', isTask: true },
+  { name: 'task2', extension: 'py', isTask: true },
+  { name: 'input', extension: 'txt', isTask: false },
+  { name: 'output', extension: 'txt', isTask: false },
 ];
 
 program
-  .command('create')
+  .command('create <day>')
   .description(
-    chalkify('creates Advent of Code template ', ['bold', 'red'])
-  )
-  .option(
-    '-d, --day <day>',
-    'the day to create a template for. when not specified template for 25 days are created',
-    0
+    chalkify('creates Advent of Code template for the day', [
+      'bold',
+      'red',
+    ])
   )
   .option(
     '-l, --language <lang>',
     'the language the tasks will be solved in (its extension)',
     'py'
   )
-  .action((command) => {
-    const { day, language } = command
-    create('', template, day, language)
+  .action((day, command) => {
+    const { language } = command;
+    create('', template, Number(day), language);
   });
 
 program.parse(process.argv);
