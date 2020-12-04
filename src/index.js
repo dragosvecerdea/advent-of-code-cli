@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import chalkify from './utils/chalkify.js';
 // eslint-disable-next-line import/extensions
 import create from './actions/create.js';
+import runTask from './actions/run.js';
 
 dotenv.config();
 
@@ -30,7 +31,7 @@ const template = [
 ];
 
 program
-  .command('create <day>')
+  .command('day <day>')
   .description(
     chalkify('creates Advent of Code template for the day', [
       'bold',
@@ -44,7 +45,29 @@ program
   )
   .action((day, command) => {
     const { language } = command;
-    create('', template, Number(day), language);
+    create('', template, day, language);
+  });
+
+program
+  .command('submit <task>')
+  .description(
+    chalkify('creates Advent of Code template for the day', [
+      'bold',
+      'red',
+    ])
+  )
+  .option(
+    '-l, --language <lang>',
+    'the language the tasks will be solved in (its extension)',
+    'py'
+  )
+  .option(
+    '-d, --day <day>',
+    'the language the tasks will be solved in (its extension)',
+    ''
+  )
+  .action((task, {language, day}) => {
+    runTask(language, task, day)
   });
 
 program.parse(process.argv);
