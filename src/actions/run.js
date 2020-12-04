@@ -25,7 +25,6 @@ const runTask = (language, task, day) => {
   const pathToDir = day ? `./day${day}` : './'
   const fileName = `task${task}`
   CMD(execLangauage(language, pathToDir, fileName), (_, stdout) => {
-      console.log(stdout)
     fs.writeFileSync(path.join(pathToDir, 'output.txt'), stdout);
   });
 };

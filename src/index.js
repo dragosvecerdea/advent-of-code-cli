@@ -2,9 +2,7 @@
 import figlet from 'figlet';
 import { program } from 'commander';
 import dotenv from 'dotenv';
-// eslint-disable-next-line import/extensions
 import chalkify from './utils/chalkify.js';
-// eslint-disable-next-line import/extensions
 import create from './actions/create.js';
 import runTask from './actions/run.js';
 

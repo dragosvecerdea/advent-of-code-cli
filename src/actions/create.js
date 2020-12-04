@@ -1,7 +1,6 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
-// eslint-disable-next-line import/extensions
 import fetchDayInput from '../utils/fetch.js';
 
 const getTasksWithLanguage = (files, language) => {
