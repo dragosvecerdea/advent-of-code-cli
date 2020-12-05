@@ -7,6 +7,12 @@ String.prototype.shellEscape = function shellEscape() {
   return this.replace(/ /g, '\\ ');
 };
 
+/**
+ * Gets the command-line script necessary to run an implementation.
+ * @param {String} language 
+ * @param {String} pathToDir 
+ * @param {String} fileName 
+ */
 function getCompileScript(language, pathToDir, fileName) {
   const pathToTask = path.join(pathToDir, fileName).shellEscape();
   const pathToInput = path.join(pathToDir, 'input.txt').shellEscape();

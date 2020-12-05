@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env node 
 import figlet from 'figlet';
 import { program } from 'commander';
 import dotenv from 'dotenv';
@@ -28,7 +28,7 @@ const template = [
   { name: 'task1', extension: 'py', isTask: true },
   { name: 'task2', extension: 'py', isTask: true },
   { name: 'input', extension: 'txt', isInput: true },
-  { name: 'output', extension: 'txt', isTask: false },
+  { name: 'output', extension: 'txt', isOutput: true },
 ];
 
 program
@@ -76,7 +76,7 @@ program
   .action((task, command) => {
     const { day, run: runBefore, language, path } = command;
     Promise.resolve(runBefore ? run(language, task, path) : Promise.resolve(''))
-      .then(() => submit(day, task))
+      .then(() => submit(day, task, path))
   });
 
 program
