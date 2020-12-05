@@ -1,9 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
-import fetchDayInput from '../utils/fetch.js';
+import api from '../utils/api.js';
 
-const getTasksWithLanguage = (files, language) => {
+const { fetchDayInput } = api;
+
+const getTemplateWithLanguage = (files, language) => {
   return files.map((file) => {
     return file.isTask
       ? {
@@ -14,10 +16,14 @@ const getTasksWithLanguage = (files, language) => {
   });
 };
 
-const loadInputFiles = async (pathToFile, day) => {
-    let dayInput
-    await fetchDayInput(day).then((data) => { dayInput = data })
-    fs.writeFileSync(pathToFile, dayInput);
+const loadPuzzleInput = async (pathToFile, day) => {
+  await fetchDayInput(day)
+    .then(({ data: dayInput }) => {
+      fs.writeFileSync(pathToFile, dayInput);
+      return `Fetched puzzle input for day ${day} succesfully`;
+    })
+    .catch((err) => `Fetching input for the puzzle unsuccessful. ${err}`)
+    .then(console.log);
 };
 
 const createFilesFromTemplate = (
@@ -26,19 +32,16 @@ const createFilesFromTemplate = (
   day,
   taskLanguage = 'py'
 ) => {
-  getTasksWithLanguage(template, taskLanguage).forEach(
-    ({ name, extension }) => {
-      const pathToFile = path.resolve(
-        pathToFiles,
-        [name, extension].join('.')
-      );
+  getTemplateWithLanguage(template, taskLanguage).forEach(
+    ({ name, extension, isInput }) => {
+      const pathToFile = path.resolve(pathToFiles, [name, extension].join('.'));
       fs.openSync(pathToFile, 'w');
-      name.includes('input') ? loadInputFiles(pathToFile, day) : null;
+      isInput ? loadPuzzleInput(pathToFile, day) : null;
     }
   );
 };
 
-const createDirFromTemplate = (
+const createDirFromTemplate = async (
   pathToDir,
   template,
   day,
@@ -49,21 +52,22 @@ const createDirFromTemplate = (
   createFilesFromTemplate(pathToFiles, template, day, taskLanguage);
 };
 
-const create = (
+const createTemplate = async (
   pathToWorkspace,
   template,
   day = 0,
   language = 'py'
 ) => {
   const days = day !== 0 ? [day] : _.range(1, 26);
-  days.forEach((currentDay) =>
-    createDirFromTemplate(
-      pathToWorkspace,
-      template,
-      currentDay,
-      language
+
+  return Promise.all(
+    days.map((currentDay) =>
+      createDirFromTemplate(pathToWorkspace, template, currentDay, language)
     )
-  );
+  )
+    .then(() => 'Workspace created successfully')
+    .catch((err) => `Creating workspace failed. ${err}`)
+    .then(console.log);
 };
 
-export default create;
+export default createTemplate;

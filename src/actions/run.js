@@ -1,32 +1,40 @@
-import { exec as CMD } from 'child_process';
+import { execSync as CMD } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 
 // eslint-disable-next-line no-extend-native
-String.prototype.escape = function escape () { return this.replace(/ /g, '\\ ') }
+String.prototype.shellEscape = function shellEscape() {
+  return this.replace(/ /g, '\\ ');
+};
 
-function execLangauage(language, pathToDir, fileName) {
-  const pathToFile = path.join(pathToDir, fileName).escape();
-  const pathToInput = path.join(pathToDir, 'input.txt').escape();
+function getCompileScript(language, pathToDir, fileName) {
+  const pathToTask = path.join(pathToDir, fileName).shellEscape();
+  const pathToInput = path.join(pathToDir, 'input.txt').shellEscape();
   const extension = language;
   switch (language) {
     case 'js':
-      return `cat ${pathToFile}.${extension}`;
+      return `cat ${pathToInput} | node ${pathToTask}.${extension}`;
     case 'py':
-      return `cat ${pathToInput} | python ${pathToFile}.${extension}`;
+      return `cat ${pathToInput} | python ${pathToTask}.${extension}`;
     case 'java':
-      return `javac ${pathToFile}.${extension} && cat ${pathToInput} | java ${pathToFile}`;
+      return `javac ${pathToTask}.${extension} && cat ${pathToInput} | java ${pathToTask}`;
     default:
-      return "echo 'Not a valid language'";
+      throw new Error();
   }
 }
 
-const runTask = (language, task, day) => {
-  const pathToDir = day ? `./day${day}` : './'
-  const fileName = `task${task}`
-  CMD(execLangauage(language, pathToDir, fileName), (_, stdout) => {
-    fs.writeFileSync(path.join(pathToDir, 'output.txt'), stdout);
-  });
+const runTask = async (language, task, pathToDir) => {
+  const fileName = `task${task}`;
+  return Promise.resolve(getCompileScript(language, pathToDir, fileName))
+    .then((compileScript) =>
+      CMD(compileScript, { stdio: [0, 'pipe', 'ignore'] }).toString()
+    )
+    .then((output) => {
+      fs.writeFileSync(path.join(pathToDir, 'output.txt'), output);
+      return `Run succesfully.\nOutput: ${output}`;
+    })
+    .catch((err) => `The task failed to run. ${err}`)
+    .then(console.log)
 };
 
 export default runTask;
