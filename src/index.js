@@ -33,17 +33,8 @@ const template = [
 
 program
   .command('create <day>')
-  .description(
-    chalkify('Creates Advent of Code template for the daily puzzles', [
-      'bold',
-      'red',
-    ])
-  )
-  .option(
-    '-l, --language <lang>',
-    'the language the tasks will be solved in (its extension)',
-    'py'
-  )
+  .description(chalkify('Creates Advent of Code template for the daily puzzles', ['bold', 'red']))
+  .option('-l, --language <lang>', 'the language the tasks will be solved in (its extension)', 'py')
   .action((day, command) => {
     const { language } = command;
     create('', template, day, language);
@@ -57,43 +48,25 @@ program
       ['bold', 'yellow']
     )
   )
+  .option('-l, --language <lang>', 'The language of the tasks to be run (its extension)', 'py')
   .option(
-    '-l, --language <lang>',
-    'the language the tasks will be solved in (its extension)',
-    'py'
+    '-d, --day <day>',
+    'The day to submit the output for. If not specified, the day is detected from the current working directory'
   )
-  .option('-d, --day <day>', 'the day to submit the output for', 1)
-  .option(
-    '-r, --run',
-    'if specified, runs the program befor submitting',
-    false
-  )
-  .option(
-    '-p, --path <path>',
-    'the path to the daily challange dir',
-    '.'
-  )
+  .option('-r, --run', 'If specified, runs the program befor submitting', false)
+  .option('-p, --path <path>', 'The path to the daily challange dir', '.')
   .action((task, command) => {
     const { day, run: runBefore, language, path } = command;
-    Promise.resolve(runBefore ? run(language, task, path) : Promise.resolve(''))
-      .then(() => submit(day, task))
+    Promise.resolve(runBefore ? run(language, task, path) : Promise.resolve('')).then(() =>
+      submit(day, task, path)
+    );
   });
 
 program
   .command('run <task>')
-  .description(
-    chalkify('Runs your solution for a puzzle', ['bold', 'blue'])
-  )
-  .option(
-    '-l, --language <lang>',
-    'the language the tasks will be solved in (its extension)',
-    'py'
-  )
-  .option(
-    '-p, --path <path>',
-    'the path to the daily challange dir',
-    '.'
-  )
+  .description(chalkify('Runs your solution for a puzzle', ['bold', 'blue']))
+  .option('-l, --language <lang>', 'the language the tasks will be solved in (its extension)', 'py')
+  .option('-p, --path <path>', 'the path to the daily challange dir', '.')
   .action((task, { language, path }) => {
     run(language, task, path);
   });
