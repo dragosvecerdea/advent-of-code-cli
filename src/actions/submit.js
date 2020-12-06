@@ -6,17 +6,21 @@ import scrapers from '../utils/scrapers.js';
 const { postAnswer } = api;
 const { getSolutionFeedback } = scrapers;
 
-const readAnswer = async () => {
-  return fs.readFileSync(path.resolve('.', 'output.txt')).toString();
+const readAnswer = async (pathToDir) => {
+  return fs.readFileSync(path.resolve(pathToDir, 'output.txt')).toString();
 };
 
-const submit = (day, task) => {
-  return readAnswer()
-    .then((answer) => postAnswer(day, task, answer))
+function detectDay(day) {
+  return day || Number(process.cwd().match(/\d/g));
+}
+
+const submit = (day, task, pathToDir) => {
+  return readAnswer(pathToDir)
+    .then((answer) => postAnswer(detectDay(day), task, answer))
     .then(getSolutionFeedback)
     .then(
       (feedback) =>
-        `Answer submitted succesfully.\nDay: ${day} Task: ${task}\nFeedback: ${feedback}`
+        `Answer submitted succesfully.\nDay: ${detectDay(day)} Task: ${task}\nFeedback: ${feedback}`
     )
     .catch('Submission failed')
     .then(console.log);

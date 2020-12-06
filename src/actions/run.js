@@ -15,7 +15,7 @@ function getCompileScript(language, pathToDir, fileName) {
     case 'js':
       return `cat ${pathToInput} | node ${pathToTask}.${extension}`;
     case 'py':
-      return `cat ${pathToInput} | python ${pathToTask}.${extension}`;
+      return `cat ${pathToInput} | python3 ${pathToTask}.${extension}`;
     case 'java':
       return `javac ${pathToTask}.${extension} && cat ${pathToInput} | java ${pathToTask}`;
     default:
