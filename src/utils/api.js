@@ -3,7 +3,14 @@ import axios from 'axios';
 const fetchDayInput = async (day) => {
   const { COOKIE: cookie, URL, YEAR } = process.env;
   return axios.get(`${URL}/${YEAR}/day/${day}/input`, {
-    headers: { cookie },
+    headers: { cookie: cookie || '' },
+  });
+};
+
+const fetchDayStatement = async (day) => {
+  const { COOKIE: cookie, URL, YEAR } = process.env;
+  return axios.get(`${URL}/${YEAR}/day/${day}`, {
+    headers: { cookie: cookie || '' },
   });
 };
 
@@ -22,4 +29,4 @@ const postAnswer = async (day, task, answer) => {
     .catch((err) => `Submit was unsuccessful. Check you cookie and internet connection ${err}`);
 };
 
-export default { fetchDayInput, postAnswer };
+export default { fetchDayInput, fetchDayStatement, postAnswer };

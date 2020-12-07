@@ -7,22 +7,29 @@ const { postAnswer } = api;
 const { getSolutionFeedback } = scrapers;
 
 const readAnswer = async (pathToDir) => {
-  return fs.readFileSync(path.resolve(pathToDir, 'output.txt')).toString();
+  const pathToOutput = path.resolve(pathToDir, 'output.txt');
+  if (fs.existsSync(pathToOutput)) {
+    return fs.readFileSync(pathToOutput);
+  }
+  throw Error('No output file found');
 };
 
-function detectDay(day) {
-  return day || Number(process.cwd().match(/\d/g));
+function detectDay(day, pathToDir) {
+  return day || Number(path.resolve(pathToDir).match(/\d/g));
 }
 
 const submit = (day, task, pathToDir) => {
   return readAnswer(pathToDir)
-    .then((answer) => postAnswer(detectDay(day), task, answer))
+    .then((answer) => postAnswer(detectDay(day, pathToDir), task, answer))
     .then(getSolutionFeedback)
     .then(
       (feedback) =>
-        `Answer submitted succesfully.\nDay: ${detectDay(day)} Task: ${task}\nFeedback: ${feedback}`
+        `Answer submitted succesfully.\nDay: ${detectDay(
+          day,
+          pathToDir
+        )} Task: ${task}\nFeedback: ${feedback}`
     )
-    .catch('Submission failed')
+    .catch((err) => `Submission failed. ${err}`)
     .then(console.log);
 };
 
