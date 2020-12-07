@@ -2,13 +2,14 @@
 import figlet from 'figlet';
 import { program } from 'commander';
 import dotenv from 'dotenv';
+import path from 'path';
 import chalkify from './utils/chalkify.js';
 import create from './actions/create.js';
 import run from './actions/run.js';
 import submit from './actions/submit.js';
 
 dotenv.config({
-  path: '/Users/dragos/Desktop/Personal Projects/aoc-cli/.env',
+  path: path.resolve('AbsolutePathToEnv' , '.env')
 });
 
 program
@@ -32,7 +33,7 @@ const template = [
 ];
 
 program
-  .command('create <day>')
+  .command('init <day>')
   .description(
     chalkify('Creates Advent of Code template for the daily puzzles', [
       'bold',
@@ -74,8 +75,8 @@ program
     '.'
   )
   .action((task, command) => {
-    const { day, run: runBefore, language, path } = command;
-    Promise.resolve(runBefore ? run(language, task, path) : Promise.resolve(''))
+    const { day, run: runBefore, language, path: pathToDir } = command;
+    Promise.resolve(runBefore ? run(language, task, pathToDir) : Promise.resolve(''))
       .then(() => submit(day, task))
   });
 
@@ -94,8 +95,8 @@ program
     'the path to the daily challange dir',
     '.'
   )
-  .action((task, { language, path }) => {
-    run(language, task, path);
+  .action((task, { language, path: pathToDir }) => {
+    run(language, task, pathToDir);
   });
 
 program.parse(process.argv);
