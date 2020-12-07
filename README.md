@@ -7,11 +7,12 @@ These instructions will get you the CLI up and running on your local machine.
 
 ### Prerequisites
 
-To run the CLI and your own AOC solutions with it, make sure you have node, npm and your own language of choice in PATH and git installed. 
+To run the CLI and your own AOC solutions with it, make sure you have git node, npm and your own language of choice in installed and in PATH. 
 
 To cehck that, run in your Terminal:
 
 ```
+git --version
 node --version
 npm --version
 <language of choice> --version
