@@ -2,13 +2,14 @@
 import figlet from 'figlet';
 import { program } from 'commander';
 import dotenv from 'dotenv';
+import path from 'path';
 import chalkify from './utils/chalkify.js';
 import create from './actions/create.js';
 import run from './actions/run.js';
 import submit from './actions/submit.js';
 
 dotenv.config({
-  path: '/Users/dragos/Desktop/Personal Projects/aoc-cli/.env',
+  path: path.resolve('AbsolutePathToEnv', '.env'),
 });
 
 program
