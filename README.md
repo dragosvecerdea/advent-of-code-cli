@@ -21,8 +21,8 @@ Options:
   -h, --help               display help for command
 
 Commands:
-  init [options] <day>     Creates Advent of Code template for the daily
-                           puzzles
+  init [options] <day>     Creates Advent of Code template for the daily challange
+                           with puzzle's input and statement
   submit [options] <task>  Submits to Advent of Code your solution of a
                            puzzle (first or second puzzle of a day)
   run [options] <task>     Runs your solution for a puzzle
