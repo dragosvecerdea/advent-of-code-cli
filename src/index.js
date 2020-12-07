@@ -32,6 +32,7 @@ const template = [
   { name: 'output', extension: 'txt', isTask: false },
 ];
 
+program
   .command('init <day>')
   .description(
     chalkify('Creates Advent of Code template for the daily puzzles', [
