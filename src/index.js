@@ -9,7 +9,7 @@ import run from './actions/run.js';
 import submit from './actions/submit.js';
 
 dotenv.config({
-  path: path.resolve("/Users/dragos/Desktop/Personal Projects/aoc-cli", ".env"),
+  path: path.resolve('AbsolutePathToEnv', '.env'),
 });
 
 program
