@@ -14,7 +14,7 @@ dotenv.config({
 
 program
   .version('1.0.0')
-  .name('aoc')
+  .name('advent')
   .usage('[command] <options>')
   .description(
     chalkify(
