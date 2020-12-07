@@ -35,7 +35,8 @@ Commands:
 ```
 Usage: advent init [options] <day>
 
-Creates Advent of Code template for the daily puzzles
+Creates Advent of Code template for the daily challange
+with puzzle's input and statement
 
 Options:
   -l, --language <lang>  the language the tasks will be solved in (its
