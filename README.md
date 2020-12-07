@@ -1,17 +1,94 @@
 # Advent of Code - CLI
 A simple and intuitive client for creating, solving and submitting solutions to *[AdventOfCode](https://www.adventofcode.com)* . 
 
+Create, Solve, Run and Submit yout Advent Of Code solutions right from your Terminal.
+
+## CLI Usage
+
+```
+Advent Of Code Client
+Usage: advent [command] <options>
+
+     _          _                          _        ___     __      ____               _                           ____   _       ___ 
+    / \      __| | __   __   ___   _ __   | |_     / _ \   / _|    / ___|   ___     __| |   ___                   / ___| | |     |_ _|
+   / _ \    / _` | \ \ / /  / _ \ | '_ \  | __|   | | | | | |_    | |      / _ \   / _` |  / _ \      _____      | |     | |      | | 
+  / ___ \  | (_| |  \ V /  |  __/ | | | | | |_    | |_| | |  _|   | |___  | (_) | | (_| | |  __/     |_____|     | |___  | |___   | | 
+ /_/   \_\  \__,_|   \_/    \___| |_| |_|  \__|    \___/  |_|      \____|  \___/   \__,_|  \___|                  \____| |_____| |___|
+                                                                                                                                      
+
+Options:
+  -V, --version            output the version number
+  -h, --help               display help for command
+
+Commands:
+  init [options] <day>     Creates Advent of Code template for the daily
+                           puzzles
+  submit [options] <task>  Submits to Advent of Code your solution of a
+                           puzzle (first or second puzzle of a day)
+  run [options] <task>     Runs your solution for a puzzle
+  help [command]           display help for command
+
+```
+
+### init
+
+```
+Usage: advent init [options] <day>
+
+Creates Advent of Code template for the daily puzzles
+
+Options:
+  -l, --language <lang>  the language the tasks will be solved in (its
+                         extension) (default: "py")
+  -h, --help             display help for command
+
+```
+
+### submit
+
+```
+Usage: advent submit [options] <task>
+
+Submits to Advent of Code your solution of a puzzle (first or second puzzle of a day)
+
+Options:
+  -l, --language <lang>  The language of the tasks to be run (its extension)
+                         (default: "py")
+  -d, --day <day>        The day to submit the output for. If not specified,
+                         the day is detected from the current working directory
+  -r, --run              If specified, runs the program befor submitting
+                         (default: false)
+  -p, --path <path>      The path to the daily challange dir (default: ".")
+  -h, --help             display help for command
+
+```
+
+### run
+
+```
+Usage: advent run [options] <task>
+
+Runs your solution for a puzzle
+
+Options:
+  -l, --language <lang>  the language the tasks will be solved in (its
+                         extension) (default: "py")
+  -p, --path <path>      the path to the daily challange dir (default: ".")
+  -h, --help             display help for command
+```
+
 ## Getting Started
 
 These instructions will get you the CLI up and running on your local machine.
 
 ### Prerequisites
 
-To run the CLI and your own AOC solutions with it, make sure you have node, npm and your own language of choice in PATH and git installed. 
+To run the CLI and your own AOC solutions with it, make sure you have git node, npm and your own language of choice in installed and in PATH. 
 
 To cehck that, run in your Terminal:
 
 ```
+git --version
 node --version
 npm --version
 <language of choice> --version
