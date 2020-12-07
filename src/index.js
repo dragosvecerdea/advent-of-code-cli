@@ -35,7 +35,7 @@ const template = [
 
 program
   .command('init <day>')
-  .description(chalkify('Creates Advent of Code template for the daily puzzles', ['bold', 'red']))
+  .description(chalkify('Creates Advent of Code template for the daily challange with puzzle\'s input and statement', ['bold', 'red']))
   .option('-l, --language <lang>', 'the language the tasks will be solved in (its extension)', 'py')
   .action((day, command) => {
     const { language } = command;
