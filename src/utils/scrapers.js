@@ -6,7 +6,7 @@ const getSolutionFeedback = (data) => {
     .innerHTML;
   const feedback = rawFeedback.substring(
     0,
-    rawFeedback.indexOf('<a href')
+    rawFeedback.indexOf('.')
   );
   return Promise.resolve(feedback);
 };

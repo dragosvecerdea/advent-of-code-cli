@@ -32,7 +32,6 @@ const template = [
   { name: 'output', extension: 'txt', isTask: false },
 ];
 
-program
   .command('init <day>')
   .description(
     chalkify('Creates Advent of Code template for the daily puzzles', [
@@ -58,22 +57,13 @@ program
       ['bold', 'yellow']
     )
   )
+  .option('-l, --language <lang>', 'The language of the tasks to be run (its extension)', 'py')
   .option(
-    '-l, --language <lang>',
-    'the language the tasks will be solved in (its extension)',
-    'py'
+    '-d, --day <day>',
+    'The day to submit the output for. If not specified, the day is detected from the current working directory'
   )
-  .option('-d, --day <day>', 'the day to submit the output for', 1)
-  .option(
-    '-r, --run',
-    'if specified, runs the program befor submitting',
-    false
-  )
-  .option(
-    '-p, --path <path>',
-    'the path to the daily challange dir',
-    '.'
-  )
+  .option('-r, --run', 'If specified, runs the program befor submitting', false)
+  .option('-p, --path <path>', 'The path to the daily challange dir', '.')
   .action((task, command) => {
     const { day, run: runBefore, language, path: pathToDir } = command;
     Promise.resolve(runBefore ? run(language, task, pathToDir) : Promise.resolve(''))
