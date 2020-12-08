@@ -1,7 +1,7 @@
 # Advent of Code - CLI
 A simple and intuitive client for creating, solving and submitting solutions to *[AdventOfCode](https://www.adventofcode.com)* . 
 
-Create, Solve, Run and Submit yout Advent Of Code solutions right from your Terminal.
+Create, Solve, Run and Submit your Advent Of Code solutions right from your Terminal.
 
 ## CLI Usage
 
@@ -84,7 +84,7 @@ These instructions will get you the CLI up and running on your local machine.
 
 ### Prerequisites
 
-To run the CLI and your own AOC solutions with it, make sure you have git node, npm and your own language of choice in installed and in PATH. 
+To run the CLI and your own AOC solutions with it, make sure you have git, node, npm and your own language of choice installed and in PATH. 
 
 To check that, run in your Terminal:
 
