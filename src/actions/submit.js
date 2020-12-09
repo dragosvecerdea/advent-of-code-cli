@@ -18,8 +18,8 @@ function detectDay(day, pathToDir) {
   return day || Number(path.resolve(pathToDir).match(/\d/g));
 }
 
-const submit = (day, task, pathToDir) => {
-  return readAnswer(pathToDir)
+const submit = async (day, task, pathToDir, inlineInput) => {
+  return Promise.resolve(inlineInput || await readAnswer(pathToDir))
     .then((answer) => postAnswer(detectDay(day, pathToDir), task, answer))
     .then(getSolutionFeedback)
     .then(

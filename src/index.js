@@ -9,7 +9,7 @@ import run from './actions/run.js';
 import submit from './actions/submit.js';
 
 dotenv.config({
-  path: path.resolve('AbsolutePathToEnv', '.env'),
+  path: path.resolve('/Users/dragos/Desktop/Personal Projects/aoc-cli', '.env'),
 });
 
 program
@@ -55,12 +55,13 @@ program
     '-d, --day <day>',
     'The day to submit the output for. If not specified, the day is detected from the current working directory'
   )
+  .option('-i, --inline-input <input>', 'The answer to the puzzle')
   .option('-r, --run', 'If specified, runs the program befor submitting', false)
   .option('-p, --path <path>', 'The path to the daily challange dir', '.')
   .action((task, command) => {
-    const { day, run: runBefore, language, path: pathToDir } = command;
+    const { day, run: runBefore, language, path: pathToDir, inlineInput } = command;
     Promise.resolve(runBefore ? run(language, task, pathToDir) : Promise.resolve('')).then(() =>
-      submit(day, task, pathToDir)
+      submit(day, task, pathToDir, inlineInput)
     );
   });
 
