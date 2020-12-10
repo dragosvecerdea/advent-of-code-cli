@@ -177,7 +177,7 @@ This is a *For Fun* project, and there exists not affiliation between this proje
 
 ## Authors
 
-* **Dragos Paul Vecerdea** - *Initial work* - [DragosGithub](https://github.com/dragosv99)
+* **Dragos Paul Vecerdea** - [DragosGithub](https://github.com/dragosv99)
 
 See also the list of [contributors](https://github.com/dragosv99/Advent-of-Code-CLI/graphs/contributors) who participated in this project.
 
